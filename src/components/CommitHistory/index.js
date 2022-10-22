@@ -23,11 +23,15 @@ const CommitHistory = () => {
   }
 
   useEffect(() => {
+    fetchCommits();
+  }, [repoDetails]);
+
+  const fetchCommits = () => {
     const { owner, repo } = repoDetails;
     if (owner && repo) {
       fetchData(owner, repo);
     }
-  }, [repoDetails]);
+  }
 
   const getRepoDetails = (details) => {
     if (details.owner.length === 0) {
@@ -45,6 +49,9 @@ const CommitHistory = () => {
 
   return (
     <div>
+      <button onClick={fetchCommits}>
+        Refresh
+      </button>
       <BasicInfoForm handleSubmit={getRepoDetails} />
       <ListOfCommits commits={commits}/>
     </div>
