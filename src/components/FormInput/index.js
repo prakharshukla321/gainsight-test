@@ -5,12 +5,13 @@ import './FormInputStyles.scss';
 const FormInput = React.forwardRef(({
   name,
   label,
-  type
+  type,
+  ...otherProps
 }, ref) => {
   return (
     <>
       <label htmlFor={name}>{label}</label>
-      <input ref={ref} type={type} id={name} name={name} />
+      <input ref={ref} type={type} id={name} name={name} {...otherProps} />
     </>
   )
 });

@@ -3,6 +3,7 @@ import AuthenticationForm from './components/AuthenticationForm';
 import CommitHistory from './components/CommitHistory';
 import { ToastContainer } from 'react-toastify';
 import SessionStorageHandler from './utils/sessionStorageHandler';
+import api from './api';
 import 'react-toastify/dist/ReactToastify.css';
 
 function App() {
@@ -20,8 +21,9 @@ function App() {
 
   useEffect(() => {
     const { current: sessionStorage } = sessionHandlerRef;
-    if (sessionStorage) {
+    if (sessionStorage && personalKey) {
       sessionStorage.set(personalKey);
+      api.setup(personalKey);
     }
   }, [personalKey]);
 
