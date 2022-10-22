@@ -5,9 +5,9 @@ const SECONDS_IN_MONTH = 31 * SECONDS_IN_DAY;
 const SECONDS_IN_YEAR = 365 * SECONDS_IN_DAY;
 //Not accounting for leap year, feb and months with are 30 days for simplicity sake for now.
 //Anyways implemented after completing the test.
-export function timeSince(time = '2022-10-22T12:42:17Z') {
+export function timeSince(time) {
   if (!time) return '';
-  const _date = new Date('2022-10-22T12:42:17Z');
+  const _date = new Date();
   if (_date.toString() === 'Invalid Date') return time;
   const interval = Math.floor((Date.now() - _date.getTime())/1000);
 
