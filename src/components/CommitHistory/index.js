@@ -11,6 +11,7 @@ const CommitHistory = () => {
   const [repoDetails, setRepoDetails] = useState({});
   const [commits, setCommits] = useState([]);
   const [isFetching, setIsFetching] = useState(false);
+  const [canRefresh, setCanRefresh] = useState(false);
 
   const fetchData = async (owner, repo) => {
     setIsFetching(true);
@@ -30,6 +31,7 @@ const CommitHistory = () => {
 
   useEffect(() => {
     fetchCommits();
+    setCanRefresh(true);
   }, [repoDetails]);
 
   const fetchCommits = () => {
@@ -55,9 +57,8 @@ const CommitHistory = () => {
 
   return (
     <div>
-      <Refresh handleClick={fetchCommits} />
+      <Refresh handleClick={fetchCommits} canRefresh={canRefresh} />
       {isFetching ? <Loader /> : <BasicInfoForm handleSubmit={getRepoDetails} />}
-      
       <ListOfCommits commits={commits}/>
     </div>
   )
