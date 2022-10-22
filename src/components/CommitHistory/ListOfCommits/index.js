@@ -1,6 +1,8 @@
+import styles from './styles.scss';
+
 const ListOfCommits = ({ commits }) => {
   return (
-    <ul className="commits">
+    <ul className="commit">
       {commits.map(({
         id, author, timestamp, message
       }) => (

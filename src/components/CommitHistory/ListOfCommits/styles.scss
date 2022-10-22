@@ -1,0 +1,17 @@
+.commit {
+  max-width: 50%;
+  padding: 10px;
+
+  &-item {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 5px;
+    padding: 10px;
+    border: 1px solid #ebebeb;
+    border-radius: 2px;
+
+    & span {
+      margin-bottom: 10px;
+    }
+  }
+}

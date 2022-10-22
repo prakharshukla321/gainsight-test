@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { toast } from 'react-toastify';
 import BasicInfoForm from './BasicInfoForm';
 import ListOfCommits from './ListOfCommits';
+import Loader from '../Loader';
 import Refresh from './Refresh';
 import { formatCommits } from '../../utils/common';
 import api from '../../api';
@@ -9,8 +10,10 @@ import api from '../../api';
 const CommitHistory = () => {
   const [repoDetails, setRepoDetails] = useState({});
   const [commits, setCommits] = useState([]);
+  const [isFetching, setIsFetching] = useState(false);
 
   const fetchData = async (owner, repo) => {
+    setIsFetching(true);
     try {
       const [data, error] = await api.getData(owner, repo);
       if (error) {
@@ -20,6 +23,8 @@ const CommitHistory = () => {
       }
     } catch (error) {
       toast.error('Unable to fetch data. Provide valid user and repo name.');
+    } finally {
+      setIsFetching(false);
     }
   }
 
@@ -50,8 +55,9 @@ const CommitHistory = () => {
 
   return (
     <div>
-      <Refresh handleClick={fetchCommits}/>
-      <BasicInfoForm handleSubmit={getRepoDetails} />
+      <Refresh handleClick={fetchCommits} />
+      {isFetching ? <Loader /> : <BasicInfoForm handleSubmit={getRepoDetails} />}
+      
       <ListOfCommits commits={commits}/>
     </div>
   )
