@@ -5,8 +5,8 @@ import FormInput from '../../FormInput';
 const BasicInfoForm = ({
   handleSubmit
 }) => {
-  const [ owner, setOwner ] = useState('prakharshukla321');
-  const [ repo, setRepo ] = useState('gainsight-test');
+  const [ owner, setOwner ] = useState('');
+  const [ repo, setRepo ] = useState('');
 
   const onSubmit = (event) => {
     event.preventDefault();

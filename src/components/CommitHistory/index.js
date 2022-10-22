@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { toast } from 'react-toastify';
 import BasicInfoForm from './BasicInfoForm';
 import ListOfCommits from './ListOfCommits';
+import Refresh from './Refresh';
 import { formatCommits } from '../../utils/common';
 import api from '../../api';
 
@@ -49,9 +50,7 @@ const CommitHistory = () => {
 
   return (
     <div>
-      <button onClick={fetchCommits}>
-        Refresh
-      </button>
+      <Refresh handleClick={fetchCommits}/>
       <BasicInfoForm handleSubmit={getRepoDetails} />
       <ListOfCommits commits={commits}/>
     </div>
