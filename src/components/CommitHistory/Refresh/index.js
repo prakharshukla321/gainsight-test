@@ -17,7 +17,7 @@ const Refresh = ({ handleClick: refreshCommits, canRefresh }) => {
       }, 1000);
     }
     return () => clearInterval(intervalId);
-  }, [seconds]);
+  }, [seconds, canRefresh]);
 
   return <button onClick={() => refreshCommits()}>Refresh({seconds})</button>
 }

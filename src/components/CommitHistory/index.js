@@ -31,7 +31,6 @@ const CommitHistory = () => {
 
   useEffect(() => {
     fetchCommits();
-    setCanRefresh(true);
   }, [repoDetails]);
 
   const fetchCommits = () => {
@@ -51,7 +50,7 @@ const CommitHistory = () => {
       toast.error('Enter valid repo name');
       return;
     }
-
+    setCanRefresh(true);
     setRepoDetails(details);
   }
 
