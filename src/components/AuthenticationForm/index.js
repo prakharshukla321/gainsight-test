@@ -1,5 +1,7 @@
 import { useRef } from 'react';
 import PropTypes from 'prop-types';
+import { toast } from 'react-toastify';
+import FormInput from '../FormInput';
 
 const AuthenticationForm = ({
   label,
@@ -10,13 +12,16 @@ const AuthenticationForm = ({
 
   const onSubmit = (event) => {
     event.preventDefault();
-    handleSubmit({ key: inputRef.current.value });
+    if (inputRef.current.value.length > 0) {
+      handleSubmit({ key : inputRef.current.value });
+    } else {
+      toast.error('Enter valid access key');
+    }
   }
 
   return (
     <form onSubmit={onSubmit}>
-      <label htmlFor={name}>{label}</label>
-      <input ref={inputRef} type="text" id={name} name={name} />
+      <FormInput ref={inputRef} name={name} label={label} />
       <button type="submit">Go</button>
     </form>
   )

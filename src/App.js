@@ -1,6 +1,9 @@
 import { useRef, useState, useEffect } from 'react';
 import AuthenticationForm from './components/AuthenticationForm';
+import CommitHistory from './components/CommitHistory';
+import { ToastContainer } from 'react-toastify';
 import SessionStorageHandler from './utils/sessionStorageHandler';
+import 'react-toastify/dist/ReactToastify.css';
 
 function App() {
   const [personalKey, setPersonalKey] = useState('');
@@ -22,19 +25,22 @@ function App() {
     }
   }, [personalKey]);
 
-  if (!personalKey) {
-    return (
-      <AuthenticationForm
-        name="name"
-        label="Personal Access Key"
-        handleSubmit={({ key }) => {
-          if (key.length > 0) setPersonalKey(key);
-        }}
-      />
-    );
-  }
-
-  return <div>Hello World</div>
+  return (
+    <>
+      {!personalKey ? (
+        <AuthenticationForm
+          name="accessKey"
+          label="Personal Access Key"
+          handleSubmit={({ key }) => {
+            if (key.length > 0) setPersonalKey(key);
+          }}
+        />
+      ): (
+        <CommitHistory accessKey={personalKey} />  
+      )}
+      <ToastContainer />
+    </>
+  )
 }
 
 export default App;
